@@ -1,0 +1,9 @@
+.product-window{
+    margin: 8px;
+    text-align: center;
+}
+.bottom-tag{
+    display:flex;
+    flex-direction: row;
+    align-items: baseline;
+}
