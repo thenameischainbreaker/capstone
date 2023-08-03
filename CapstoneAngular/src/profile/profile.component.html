@@ -1,18 +1,14 @@
-<div class="top-bar">
-    <a href="">Home</a>
-    <a href="cart">Cart</a>
-    <app-user-info #user></app-user-info>
-</div>
+<app-top-bar #top></app-top-bar>
 <div class="profile-info">
     <table>
         <tr>
-            <td>Username:</td><td>{{user.uName}}</td>
+            <td>Username:</td><td>{{top.user.uName}}</td>
         </tr>
         <tr>
-            <td>Email:</td><td>{{user.email}}</td>
+            <td>Email:</td><td>{{top.user.email}}</td>
         </tr>
         <tr>
-            <td>Balance:</td><td>${{user.balance}}</td>
+            <td>Balance:</td><td>${{top.user.balance}}</td>
         </tr>
     </table>
 </div>

@@ -13,6 +13,7 @@ import { HomeComponent } from '../home/home.component';
 import { AdminComponent } from '../admin/admin.component';
 import { UserInfoComponent } from '../user-info/user-info.component';
 import { FormsModule } from '@angular/forms';
+import { TopBarComponent } from '../top-bar/top-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     AdminComponent,
     UserInfoComponent,
+    TopBarComponent,
   ],
   imports: [
     BrowserModule,
