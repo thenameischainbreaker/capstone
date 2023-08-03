@@ -14,6 +14,13 @@
           </div>
         </div>
         <div class="form-field">
+          <label for="admin">Admin</label>
+          <select required name="admin" [(ngModel)]="uf1.value.admin">
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select>
+        </div>
+        <div class="form-field">
             <label for="email">Email</label>
             <input type="text" required email name="email" [(ngModel)]="uf1.value.email" #email='ngModel'/>
             <div *ngIf = "!email.valid" class="error">
@@ -54,6 +61,13 @@
               Name is required
             </p>
           </div>
+        </div>
+        <div class="form-field">
+          <label for="admin">Admin</label>
+          <select required name="admin" [(ngModel)]="uf2.value.admin">
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select>
         </div>
         <div class="form-field">
             <label for="email">Email</label>
