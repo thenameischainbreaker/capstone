@@ -19,9 +19,9 @@ export class ProductComponent {
 }
 
 export class product{
-  id=0;
-  name="Default Name";
-  imageId="";
-  price=0.0;
-  description="Default Desc";
+  p_id=0;
+  p_name="Default Name";
+  image_id="";
+  p_price=0.0;
+  p_description="Default Desc";
 }

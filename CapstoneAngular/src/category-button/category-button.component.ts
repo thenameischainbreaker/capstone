@@ -16,6 +16,6 @@ export class CategoryButtonComponent {
 }
 
 export class category{
-  id = 0;
-  name = "Default Name";
+  c_id = 0;
+  c_name = "Default Name";
 }

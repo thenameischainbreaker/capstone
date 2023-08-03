@@ -194,11 +194,11 @@
           <th>Description</th>
         </tr>
         <tr *ngFor="let p of prodList">
-          <td><button type="button" (click)="deleteProduct(p.id)">{{p.id}}</button></td>
-          <td>{{p.name}}</td>
-          <td>{{p.imageId}}</td>
-          <td>{{p.price}}</td>
-          <td>{{p.description}}</td>
+          <td><button type="button" (click)="deleteProduct(p.p_id)">{{p.p_id}}</button></td>
+          <td>{{p.p_name}}</td>
+          <td>{{p.image_id}}</td>
+          <td>{{p.p_price}}</td>
+          <td>{{p.p_description}}</td>
         </tr>
     </table>
 </div>
