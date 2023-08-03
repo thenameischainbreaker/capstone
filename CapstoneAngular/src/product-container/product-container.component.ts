@@ -7,9 +7,12 @@ import { product } from 'src/product/product.component';
   styleUrls: ['./product-container.component.css']
 })
 export class ProductContainerComponent {
-  prodList: product[] = [new product()];
-
+  prodList: product[] = [new product(),new product()];
+  constructor(){
+    this.loadProdList();
+  }
   loadProdList(){
     //return ProductService.getProducts
+    console.log("loadProdList");
   }
 }

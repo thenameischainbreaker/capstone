@@ -3,11 +3,11 @@
     border-bottom-style: solid;
     border-top-width:10px;
     border-bottom-width: 10px;
-    border-top-color: gray;
-    border-bottom-color: gray;
+    border-top-color: skyblue;
+    border-bottom-color: skyblue;
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: baseline;
-    align-content: space-between;
+    align-content: space-evenly;
 }

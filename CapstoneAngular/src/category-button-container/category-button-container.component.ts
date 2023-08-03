@@ -7,7 +7,7 @@ import { category } from 'src/category-button/category-button.component';
   styleUrls: ['./category-button-container.component.css']
 })
 export class CategoryButtonContainerComponent {
-  catList: category[] = [new category()];
+  catList: category[] = [new category(),new category()];
 
   loadCategories(){
     //return HttpService.getCategories

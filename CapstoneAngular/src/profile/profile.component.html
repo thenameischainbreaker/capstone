@@ -12,10 +12,10 @@
         </tr>
     </table>
 </div>
-<div class="update-window">
+<div class="update-profile-window">
     <h3>Update Profile</h3>
     <form #f="ngForm" (ngSubmit)="updateProfile(f,id)">
-        <div>
+        <div class="form-field">
             <label for="name">Name</label>
             <input type="text" required name="name" [(ngModel)]="f.value.name" #name = 'ngModel'/>
             <div *ngIf = "!name.valid" class="error">
@@ -24,7 +24,7 @@
             </p>
           </div>
         </div>
-        <div>
+        <div class="form-field">
             <label for="email">Email</label>
             <input type="text" required email name="email" [(ngModel)]="f.value.email" #email='ngModel'/>
             <div *ngIf = "!email.valid" class="error">
@@ -44,8 +44,8 @@
 <div class="balance-manager-window">
     <h3>Add to Balance</h3>
     <form #f="ngForm" (ngSubmit)="addToBalance(f,id)">
-        <div>
-            <label for="deposit">Amount:</label>
+        <div class="form-field">
+            <label for="deposit">Amount</label>
             <input type="number" name="deposit" step=0.01 min=0 [(ngModel)]="f.value.deposit">
         </div>
         <p>
