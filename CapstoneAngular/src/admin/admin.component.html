@@ -1,0 +1,286 @@
+<app-profile></app-profile>
+<h2>Admin Features</h2>
+<h3>Manage Users</h3>
+<div class="add-window">
+    <h4>Add User</h4>
+    <form #sf="ngForm" (ngSubmit)="addUser(uf)">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" required name="name" [(ngModel)]="f.value.name" #name = 'ngModel'/>
+            <div *ngIf = "!name.valid" class="error">
+            <p *ngIf="name.errors?.['required']">
+              Name is required
+            </p>
+          </div>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" required email name="email" [(ngModel)]="f.value.email" #email='ngModel'/>
+            <div *ngIf = "!email.valid" class="error">
+            <p *ngIf="email.errors?.['required']">
+              Email is required
+            </p>
+            <p *ngIf="email.errors?.['email']">
+              Need valid email
+            </p>
+          </div>
+        </div>
+        <div>
+            <label for="imageId">Image ID</label>
+            <input type="text" required name="imageId" [(ngModel)]="f.value.imageId" #imageId = 'ngModel'/>
+            <div *ngIf = "!imageId.valid" class="error">
+            <p *ngIf="imageId.errors?.['required']">
+              Image Id is required
+            </p>
+          </div>
+        </div>
+        <p>
+            <button type = "submit">Submit</button>
+        </p>
+    </form>
+</div>
+<div class="update-window">
+    <h4>Update User</h4>
+    <form #uf="ngForm" (ngSubmit)="updateUser(uf)">
+        <div>
+            <label for="id">ID</label>
+            <input type="number" name="id" min=0 required [(ngModel)]="f.value.id">
+        </div>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" required name="name" [(ngModel)]="f.value.name" #name = 'ngModel'/>
+            <div *ngIf = "!name.valid" class="error">
+            <p *ngIf="name.errors?.['required']">
+              Name is required
+            </p>
+          </div>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" required email name="email" [(ngModel)]="f.value.email" #email='ngModel'/>
+            <div *ngIf = "!email.valid" class="error">
+            <p *ngIf="email.errors?.['required']">
+              Email is required
+            </p>
+            <p *ngIf="email.errors?.['email']">
+              Need valid email
+            </p>
+          </div>
+        </div>
+        <div>
+            <label for="imageId">Image ID</label>
+            <input type="text" required name="imageId" [(ngModel)]="f.value.imageId" #imageId = 'ngModel'/>
+            <div *ngIf = "!imageId.valid" class="error">
+            <p *ngIf="imageId.errors?.['required']">
+              Image Id is required
+            </p>
+          </div>
+        </div>
+        <p>
+            <button type = "submit">Submit</button>
+        </p>
+    </form>
+</div>
+<div class="delete-window">
+    <table>
+        <tr>
+          <th>Delete</th>
+          <th>Name</th>
+          <th>Admin Status</th>
+          <th>Email</th>
+          <th>Balance</th>
+          <th>Profile Picture</th>
+        </tr>
+        <tr *ngFor="let u of userList">
+          <td><button type="button" (click)="deleteUser(u.id)">{{u.id}}</button></td>
+          <td>{{u.name}}</td>
+          <td>{{u.admin}}</td>
+          <td>{{u.email}}</td>
+          <td>{{u.balance}}</td>
+          <td>{{u.pic}}</td>
+        </tr>
+    </table>
+</div>
+<h3>Manage Products</h3>
+<div class="add-window">
+    <h4>Add Product</h4>
+    <form #pf="ngForm" (ngSubmit)="addProduct(pf)">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" required name="name" [(ngModel)]="f.value.name" #name = 'ngModel'/>
+            <div *ngIf = "!name.valid" class="error">
+            <p *ngIf="name.errors?.['required']">
+              Name is required
+            </p>
+          </div>
+        </div>
+        <div>
+            <label for="imageId">Image ID</label>
+            <input type="text" required name="imageId" [(ngModel)]="f.value.imageId" #imageId = 'ngModel'/>
+            <div *ngIf = "!imageId.valid" class="error">
+            <p *ngIf="imageId.errors?.['required']">
+              Image Id is required
+            </p>
+          </div>
+        </div>
+        <div>
+            <label for="price">Price</label>
+            <input type="number" name="price" step=0.01 min=0 required [(ngModel)]="f.value.price">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input type="text" required name="description" [(ngModel)]="f.value.description" #description = 'ngModel'/>
+            <div *ngIf = "!description.valid" class="error">
+            <p *ngIf="description.errors?.['required']">
+              Description is required
+            </p>
+          </div>
+        </div>
+        <p>
+            <button type = "submit">Submit</button>
+        </p>
+    </form>
+</div>
+<div class="update-window">
+    <h4>Update Product</h4>
+    <form #pf="ngForm" (ngSubmit)="updateProduct(pf)">
+        <div>
+            <label for="id">ID</label>
+            <input type="number" name="id" min=0 required [(ngModel)]="f.value.id">
+        </div>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" required name="name" [(ngModel)]="f.value.name" #name = 'ngModel'/>
+            <div *ngIf = "!name.valid" class="error">
+            <p *ngIf="name.errors?.['required']">
+              Name is required
+            </p>
+          </div>
+        </div>
+        <div>
+            <label for="imageId">Image ID</label>
+            <input type="text" required name="imageId" [(ngModel)]="f.value.imageId" #imageId = 'ngModel'/>
+            <div *ngIf = "!imageId.valid" class="error">
+            <p *ngIf="imageId.errors?.['required']">
+              Image Id is required
+            </p>
+          </div>
+        </div>
+        <div>
+            <label for="price">Price</label>
+            <input type="number" name="price" step=0.01 min=0 required [(ngModel)]="f.value.price">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input type="text" required name="description" [(ngModel)]="f.value.description" #description = 'ngModel'/>
+            <div *ngIf = "!description.valid" class="error">
+            <p *ngIf="description.errors?.['required']">
+              Description is required
+            </p>
+          </div>
+        </div>
+        <p>
+            <button type = "submit">Submit</button>
+        </p>
+    </form>
+</div>
+<div class="delete-window">
+    <table>
+        <tr>
+          <th>Delete</th>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+        <tr *ngFor="let p of prodList">
+          <td><button type="button" (click)="deleteProduct(p.id)">{{p.id}}</button></td>
+          <td>{{p.name}}</td>
+          <td>{{p.imageId}}</td>
+          <td>{{p.price}}</td>
+          <td>{{p.description}}</td>
+        </tr>
+    </table>
+</div>
+<h3>Manage Stock</h3>
+<div class="stock-window">
+    <table>
+        <tr>
+          <th>Product ID</th>
+          <th>Quantity</th>
+        </tr>
+        <tr *ngFor="let s of stockList">
+          <td>{{s.pId}}</td>
+          <td>{{s.sQuantity}}</td>
+        </tr>
+    </table>
+</div>
+<div class="update-stock-window">
+    <h4>Adjust Stock</h4>
+    <form #f="ngForm" (ngSubmit)="updateStock(sf)">
+        <div>
+            <label for="id">ID</label>
+            <input type="number" name="id" min=0 required [(ngModel)]="f.value.id">
+        </div>
+        <div>
+            <label for="amount">Amount</label>
+            <input type="number" name="amount" min=0 required [(ngModel)]="f.value.id">
+        </div>
+        <p>
+            <button type = "submit">Submit</button>
+        </p>
+    </form>
+</div>
+<h3>Manage Orders</h3>
+<div class="display-orders-window">
+    <h4>Order Report</h4>
+    <form #of="ngForm" (ngSubmit)="getOrders(of)">
+        <div>
+            <label for="date">Date</label>
+            <input type="date" name="date" [(ngModel)]="f.value.date" placeholder="yyyy-MM-dd" required />
+        </div>
+        <p>
+            <button type = "submit">Submit</button>
+        </p>
+    </form>
+    <table>
+        <tr>
+          <th>Order ID</th>
+          <th>User ID</th>
+          <th>Product ID</th>
+          <th>Quantity</th>
+          <th>Date</th>
+          <th>Price</th>
+          <th>Discount ID</th>
+        </tr>
+        <tr *ngFor="let o of ordersList">
+          <td>{{o.oId}}</td>
+          <td>{{o.uId}}</td>
+          <td>{{o.pId}}</td>
+          <td>{{o.oQuantity}}</td>
+          <td>{{o.oDate}}</td>
+          <td>{{o.oPrice}}</td>
+          <td>{{o.dId}}</td>
+        </tr>
+    </table>
+</div>
+<div class="add-discount-window">
+    <h4>Issue Discount</h4>
+    <form #df="ngForm" (ngSubmit)="issueDiscount(df)">
+        <div>
+            <label for="pId">Product ID</label>
+            <input type="number" name="pId" min=0 required [(ngModel)]="f.value.pId">
+        </div>
+        <div>
+            <label for="uId">ID</label>
+            <input type="number" name="uId" min=0 required [(ngModel)]="f.value.uId">
+        </div>
+        <div>
+            <label for="discount">Discount(%)</label>
+            <input type="number" name="discount" min=0 max=1 step=0.01 required [(ngModel)]="f.value.discount">
+        </div>
+        <p>
+            <button type = "submit">Submit</button>
+        </p>
+    </form>
+</div>

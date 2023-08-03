@@ -1,0 +1,11 @@
+<div *ngIf="uAdmin=='True'; else notAdmin">
+    <div class="info">
+        <a href="admin">{{uName}}</a> <div>{{uPic}}</div>
+    </div>
+</div>
+
+<ng-template #notAdmin>
+    <div class="info">
+        <a href="profile">{{uName}}</a> <div>{{uPic}}</div>
+    </div>
+</ng-template>

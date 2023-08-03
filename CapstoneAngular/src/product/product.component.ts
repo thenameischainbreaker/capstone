@@ -11,15 +11,17 @@ export class ProductComponent {
   @Input()imageId="Image ID";
   @Input()pPrice=0.0;
   @Input()pDescription="Description";
-  
 
+  addToCart()
+  {
+    console.log("Added to cart");
+  }
 }
 
 export class product{
   id=0;
-  name="";
+  name="Default Name";
   imageId="";
   price=0.0;
-  description="";
-
+  description="Default Desc";
 }

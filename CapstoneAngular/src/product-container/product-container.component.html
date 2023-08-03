@@ -1,4 +1,4 @@
-<div class="product-list">
-    <app-product></app-product>
+<div class="product-list" *ngFor="let prod of prodList">
+    <app-product [pName]="prod.name" [pDescription]="prod.description"></app-product>
 </div>
 

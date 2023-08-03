@@ -1,6 +1,3 @@
-<div class="frame">
-    <app-category-button></app-category-button>
-    <app-category-button></app-category-button>
-    <app-category-button></app-category-button>
-    <app-category-button></app-category-button>
+<div class="frame" *ngFor="let cat of catList">
+    <app-category-button [cId]="cat.id" [cName]="cat.name"></app-category-button>
 </div>

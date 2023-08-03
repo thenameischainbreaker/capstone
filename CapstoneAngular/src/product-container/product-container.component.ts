@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { product } from 'src/product/product.component';
 
 @Component({
   selector: 'app-product-container',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-container.component.css']
 })
 export class ProductContainerComponent {
-  
+  prodList: product[] = [new product()];
+
+  loadProdList(){
+    //return ProductService.getProducts
+  }
 }

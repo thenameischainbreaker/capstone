@@ -10,6 +10,9 @@ import { CategoryButtonComponent } from '../category-button/category-button.comp
 import { CartComponent } from '../cart/cart.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { HomeComponent } from '../home/home.component';
+import { AdminComponent } from '../admin/admin.component';
+import { UserInfoComponent } from '../user-info/user-info.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,10 +24,13 @@ import { HomeComponent } from '../home/home.component';
     CartComponent,
     ProfileComponent,
     HomeComponent,
+    AdminComponent,
+    UserInfoComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
