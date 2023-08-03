@@ -1,1 +1,19 @@
 <app-top-bar></app-top-bar>
+<h3>Cart</h3>
+<div class="order-window">
+    <table>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Discount</th>
+        </tr>
+        <tr *ngFor="let o of ordersList">
+          <td>{{o.pId}}</td>
+          <td>{{o.oQuantity}}</td>
+          <td>{{o.oPrice}}</td>
+          <td>{{o.dId}}</td>
+        </tr>
+    </table>
+    <button type="button" (click)="sendOrder()">Order</button>
+</div>

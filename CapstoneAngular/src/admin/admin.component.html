@@ -1,12 +1,12 @@
 <app-profile></app-profile>
 <h2>Admin Features</h2>
 <h3>Manage Users</h3>
-<div class="add-window">
+<div class="add-user-window">
     <h4>Add User</h4>
-    <form #sf="ngForm" (ngSubmit)="addUser(uf)">
+    <form #uf1="ngForm" (ngSubmit)="addUser(uf1)">
         <div>
             <label for="name">Name</label>
-            <input type="text" required name="name" [(ngModel)]="f.value.name" #name = 'ngModel'/>
+            <input type="text" required name="name" [(ngModel)]="uf1.value.name" #name = 'ngModel'/>
             <div *ngIf = "!name.valid" class="error">
             <p *ngIf="name.errors?.['required']">
               Name is required
@@ -15,7 +15,7 @@
         </div>
         <div>
             <label for="email">Email</label>
-            <input type="text" required email name="email" [(ngModel)]="f.value.email" #email='ngModel'/>
+            <input type="text" required email name="email" [(ngModel)]="uf1.value.email" #email='ngModel'/>
             <div *ngIf = "!email.valid" class="error">
             <p *ngIf="email.errors?.['required']">
               Email is required
@@ -27,7 +27,7 @@
         </div>
         <div>
             <label for="imageId">Image ID</label>
-            <input type="text" required name="imageId" [(ngModel)]="f.value.imageId" #imageId = 'ngModel'/>
+            <input type="text" required name="imageId" [(ngModel)]="uf1.value.imageId" #imageId = 'ngModel'/>
             <div *ngIf = "!imageId.valid" class="error">
             <p *ngIf="imageId.errors?.['required']">
               Image Id is required
@@ -39,39 +39,39 @@
         </p>
     </form>
 </div>
-<div class="update-window">
+<div class="update-user-window">
     <h4>Update User</h4>
-    <form #uf="ngForm" (ngSubmit)="updateUser(uf)">
+    <form #uf2="ngForm" (ngSubmit)="updateUser(uf2)">
         <div>
             <label for="id">ID</label>
-            <input type="number" name="id" min=0 required [(ngModel)]="f.value.id">
+            <input type="number" name="id" min=0 required [(ngModel)]="uf2.value.id">
         </div>
         <div>
             <label for="name">Name</label>
-            <input type="text" required name="name" [(ngModel)]="f.value.name" #name = 'ngModel'/>
-            <div *ngIf = "!name.valid" class="error">
-            <p *ngIf="name.errors?.['required']">
+            <input type="text" required name="name" [(ngModel)]="uf2.value.name" #uf2name = 'ngModel'/>
+            <div *ngIf = "!uf2name.valid" class="error">
+            <p *ngIf="uf2name.errors?.['required']">
               Name is required
             </p>
           </div>
         </div>
         <div>
             <label for="email">Email</label>
-            <input type="text" required email name="email" [(ngModel)]="f.value.email" #email='ngModel'/>
-            <div *ngIf = "!email.valid" class="error">
-            <p *ngIf="email.errors?.['required']">
+            <input type="text" required email name="email" [(ngModel)]="uf2.value.email" #uf2email='ngModel'/>
+            <div *ngIf = "!uf2email.valid" class="error">
+            <p *ngIf="uf2email.errors?.['required']">
               Email is required
             </p>
-            <p *ngIf="email.errors?.['email']">
+            <p *ngIf="uf2email.errors?.['email']">
               Need valid email
             </p>
           </div>
         </div>
         <div>
             <label for="imageId">Image ID</label>
-            <input type="text" required name="imageId" [(ngModel)]="f.value.imageId" #imageId = 'ngModel'/>
-            <div *ngIf = "!imageId.valid" class="error">
-            <p *ngIf="imageId.errors?.['required']">
+            <input type="text" required name="imageId" [(ngModel)]="uf2.value.imageId" #uf2imageId = 'ngModel'/>
+            <div *ngIf = "!uf2imageId.valid" class="error">
+            <p *ngIf="uf2imageId.errors?.['required']">
               Image Id is required
             </p>
           </div>
@@ -81,7 +81,7 @@
         </p>
     </form>
 </div>
-<div class="delete-window">
+<div class="delete-user-window">
     <table>
         <tr>
           <th>Delete</th>
@@ -102,36 +102,36 @@
     </table>
 </div>
 <h3>Manage Products</h3>
-<div class="add-window">
+<div class="add-product-window">
     <h4>Add Product</h4>
-    <form #pf="ngForm" (ngSubmit)="addProduct(pf)">
+    <form #pf1="ngForm" (ngSubmit)="addProduct(pf1)">
         <div>
             <label for="name">Name</label>
-            <input type="text" required name="name" [(ngModel)]="f.value.name" #name = 'ngModel'/>
-            <div *ngIf = "!name.valid" class="error">
-            <p *ngIf="name.errors?.['required']">
+            <input type="text" required name="name" [(ngModel)]="pf1.value.name" #pf1name = 'ngModel'/>
+            <div *ngIf = "!pf1name.valid" class="error">
+            <p *ngIf="pf1name.errors?.['required']">
               Name is required
             </p>
           </div>
         </div>
         <div>
             <label for="imageId">Image ID</label>
-            <input type="text" required name="imageId" [(ngModel)]="f.value.imageId" #imageId = 'ngModel'/>
-            <div *ngIf = "!imageId.valid" class="error">
-            <p *ngIf="imageId.errors?.['required']">
+            <input type="text" required name="imageId" [(ngModel)]="pf1.value.imageId" #pf1imageId = 'ngModel'/>
+            <div *ngIf = "!pf1imageId.valid" class="error">
+            <p *ngIf="pf1imageId.errors?.['required']">
               Image Id is required
             </p>
           </div>
         </div>
         <div>
             <label for="price">Price</label>
-            <input type="number" name="price" step=0.01 min=0 required [(ngModel)]="f.value.price">
+            <input type="number" name="price" step=0.01 min=0 required [(ngModel)]="pf1.value.price">
         </div>
         <div>
             <label for="description">Description</label>
-            <input type="text" required name="description" [(ngModel)]="f.value.description" #description = 'ngModel'/>
-            <div *ngIf = "!description.valid" class="error">
-            <p *ngIf="description.errors?.['required']">
+            <input type="text" required name="description" [(ngModel)]="pf1.value.description" #pf1description = 'ngModel'/>
+            <div *ngIf = "!pf1description.valid" class="error">
+            <p *ngIf="pf1description.errors?.['required']">
               Description is required
             </p>
           </div>
@@ -141,40 +141,40 @@
         </p>
     </form>
 </div>
-<div class="update-window">
+<div class="update-product-window">
     <h4>Update Product</h4>
-    <form #pf="ngForm" (ngSubmit)="updateProduct(pf)">
+    <form #pf2="ngForm" (ngSubmit)="updateProduct(pf2)">
         <div>
             <label for="id">ID</label>
-            <input type="number" name="id" min=0 required [(ngModel)]="f.value.id">
+            <input type="number" name="id" min=0 required [(ngModel)]="pf2.value.id">
         </div>
         <div>
             <label for="name">Name</label>
-            <input type="text" required name="name" [(ngModel)]="f.value.name" #name = 'ngModel'/>
-            <div *ngIf = "!name.valid" class="error">
-            <p *ngIf="name.errors?.['required']">
+            <input type="text" required name="name" [(ngModel)]="pf2.value.name" #pf2name = 'ngModel'/>
+            <div *ngIf = "!pf2name.valid" class="error">
+            <p *ngIf="pf2name.errors?.['required']">
               Name is required
             </p>
           </div>
         </div>
         <div>
             <label for="imageId">Image ID</label>
-            <input type="text" required name="imageId" [(ngModel)]="f.value.imageId" #imageId = 'ngModel'/>
-            <div *ngIf = "!imageId.valid" class="error">
-            <p *ngIf="imageId.errors?.['required']">
+            <input type="text" required name="imageId" [(ngModel)]="pf2.value.imageId" #pf2imageId = 'ngModel'/>
+            <div *ngIf = "!pf2imageId.valid" class="error">
+            <p *ngIf="pf2imageId.errors?.['required']">
               Image Id is required
             </p>
           </div>
         </div>
         <div>
             <label for="price">Price</label>
-            <input type="number" name="price" step=0.01 min=0 required [(ngModel)]="f.value.price">
+            <input type="number" name="price" step=0.01 min=0 required [(ngModel)]="pf2.value.price">
         </div>
         <div>
             <label for="description">Description</label>
-            <input type="text" required name="description" [(ngModel)]="f.value.description" #description = 'ngModel'/>
-            <div *ngIf = "!description.valid" class="error">
-            <p *ngIf="description.errors?.['required']">
+            <input type="text" required name="description" [(ngModel)]="pf2.value.description" #pf2description = 'ngModel'/>
+            <div *ngIf = "!pf2description.valid" class="error">
+            <p *ngIf="pf2description.errors?.['required']">
               Description is required
             </p>
           </div>
@@ -184,7 +184,7 @@
         </p>
     </form>
 </div>
-<div class="delete-window">
+<div class="delete-product-window">
     <table>
         <tr>
           <th>Delete</th>
@@ -217,14 +217,14 @@
 </div>
 <div class="update-stock-window">
     <h4>Adjust Stock</h4>
-    <form #f="ngForm" (ngSubmit)="updateStock(sf)">
+    <form #sf1="ngForm" (ngSubmit)="updateStock(sf1)">
         <div>
             <label for="id">ID</label>
-            <input type="number" name="id" min=0 required [(ngModel)]="f.value.id">
+            <input type="number" name="id" min=0 required [(ngModel)]="sf1.value.id">
         </div>
         <div>
             <label for="amount">Amount</label>
-            <input type="number" name="amount" min=0 required [(ngModel)]="f.value.id">
+            <input type="number" name="amount" min=0 required [(ngModel)]="sf1.value.amount">
         </div>
         <p>
             <button type = "submit">Submit</button>
@@ -236,8 +236,12 @@
     <h4>Order Report</h4>
     <form #of="ngForm" (ngSubmit)="getOrders(of)">
         <div>
-            <label for="date">Date</label>
-            <input type="date" name="date" [(ngModel)]="f.value.date" placeholder="yyyy-MM-dd" required />
+            <label for="startDate">Start Date</label>
+            <input type="date" name="startDate" [(ngModel)]="of.value.startDate" placeholder="yyyy-MM-dd" required />
+        </div>
+        <div>
+          <label for="endDate">End Date</label>
+          <input type="date" name="endDate" [(ngModel)]="of.value.endDate" placeholder="yyyy-MM-dd" required />
         </div>
         <p>
             <button type = "submit">Submit</button>
@@ -269,15 +273,15 @@
     <form #df="ngForm" (ngSubmit)="issueDiscount(df)">
         <div>
             <label for="pId">Product ID</label>
-            <input type="number" name="pId" min=0 required [(ngModel)]="f.value.pId">
+            <input type="number" name="pId" min=0 required [(ngModel)]="df.value.pId">
         </div>
         <div>
-            <label for="uId">ID</label>
-            <input type="number" name="uId" min=0 required [(ngModel)]="f.value.uId">
+            <label for="uId">User ID</label>
+            <input type="number" name="uId" min=0 required [(ngModel)]="df.value.uId">
         </div>
         <div>
             <label for="discount">Discount(%)</label>
-            <input type="number" name="discount" min=0 max=1 step=0.01 required [(ngModel)]="f.value.discount">
+            <input type="number" name="discount" min=0 max=1 step=0.01 required [(ngModel)]="df.value.discount">
         </div>
         <p>
             <button type = "submit">Submit</button>
