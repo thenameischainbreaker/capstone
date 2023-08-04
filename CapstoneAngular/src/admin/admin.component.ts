@@ -104,3 +104,10 @@ export class orders{
   oPrice=0.0;
   dId=0;
 }
+
+export class discount{
+  d_id = 0;
+	p_id = 0;
+	u_id = 0
+	discount = 0;
+}
