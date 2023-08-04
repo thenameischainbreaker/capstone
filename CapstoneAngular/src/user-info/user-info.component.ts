@@ -24,3 +24,14 @@ export class user{
   balance=100.00;
   pic="ProfilePic"
 }
+
+export class userMetaData{
+  userId=0;
+	role = "True";
+	email= "email";
+	name = "name";
+	balance = 0.0;
+	profile_picture = "profile_picture";
+	message = "message";
+	emailVerified = true;
+}

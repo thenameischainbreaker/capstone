@@ -15,6 +15,7 @@ export class ProductComponent {
   addToCart()
   {
     console.log("Added to cart");
+    alert("Added to cart");
   }
 }
 

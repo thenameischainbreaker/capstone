@@ -1,6 +1,16 @@
-<div class="frame">
+<!--<mat-button-toggle-group name="categories" aria-label="Categories" class="frame" multiple 
+[(ngModel)]="selectedCategories" name="categories">
     <div *ngFor="let cat of catList">
-        <app-category-button [cId]="cat.c_id" [cName]="cat.c_name"></app-category-button>
+        <mat-button-toggle value=cat.cId>{{cat.c_name}}</mat-button-toggle>
     </div>
+</mat-button-toggle-group>
+<button click="Search()">Search</button>-->
+<div class="frame">
+    <mat-button-toggle-group name="ingredients" aria-label="Ingredients" multiple
+    [(ngModel)]="selectedCategories">
+    <div *ngFor="let cat of catList">
+        <mat-button-toggle value={{cat.c_id}} style="padding:0">{{cat.c_name}}</mat-button-toggle>
+    </div>
+    <button (click)="Search()">Search</button>
+</mat-button-toggle-group>
 </div>
-

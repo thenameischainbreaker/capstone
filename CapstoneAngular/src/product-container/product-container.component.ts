@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProductServiceService } from 'src/app/product-service.service';
 import { product } from 'src/product/product.component';
 
@@ -9,7 +9,7 @@ import { product } from 'src/product/product.component';
   providers: [ProductServiceService]
 })
 export class ProductContainerComponent {
-  prodList: product[] = [];
+  @Input()prodList: product[] = [];
   constructor(private http:ProductServiceService){
     this.loadProdList();
   }
@@ -18,8 +18,8 @@ export class ProductContainerComponent {
     console.log("loadProdList");
     return this.http.getAllProduct().subscribe(data=>{
       console.log(data);
-      this.prodList=Object.values(data);
-      console.log(this.prodList[1])
+      ProductServiceService.prodList=Object.values(data);
+      this.prodList=ProductServiceService.prodList
     },error=>console.log(error));
   }
 }

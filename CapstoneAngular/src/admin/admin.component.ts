@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ProductServiceService } from 'src/app/product-service.service';
 import { product } from 'src/product/product.component';
 import { user } from 'src/user-info/user-info.component';
 
@@ -9,7 +10,7 @@ import { user } from 'src/user-info/user-info.component';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  constructor(){
+  constructor(private prodServe:ProductServiceService){
     this.displayUsers();
     this.displayProduct();
     this.displayStock();
@@ -40,6 +41,12 @@ export class AdminComponent {
     //calls ProduceService.addProduct to add Product to repository
     console.log("addProduct");
     console.log(pf.value);
+    let p = new product;
+    p.p_name=pf.value.name;
+    p.p_price=pf.value.price;
+    p.p_description=pf.value.descirption;
+    p.image_id=pf.value.imageId;
+    return this.prodServe.postProduct(p).subscribe();
   }
   updateProduct(pf:NgForm){
     //calls ProductService.updateProduct to update Product in repository

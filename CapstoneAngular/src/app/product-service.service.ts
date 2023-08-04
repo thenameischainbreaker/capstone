@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { product } from 'src/product/product.component';
 import { category } from 'src/category-button/category-button.component';
+import { getCookie} from 'typescript-cookie';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,26 @@ export class ProductServiceService {
 
   constructor(private http:HttpClient) { }
 
+  public static prodList: product[] = []
+
   postProduct(p: product):Observable<object>
   {
-    return this.http.post(`${this.url}/add`,p);
+    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
+    console.log(googleBearerToken);
+    let headers = new HttpHeaders();
+    headers.set('googleBearerToken',`${googleBearerToken}`);
+    console.log(headers);
+    return this.http.post(`${this.url}/add`,p,{headers});
   }
 
   updateProduct(p:product):Observable<object>
   {
-    return this.http.put(`${this.url}/update`,p);
+    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
+    console.log(googleBearerToken);
+    let headers = new HttpHeaders();
+    headers.set('googleBearerToken',`${googleBearerToken}`);
+    console.log(headers);
+    return this.http.put(`${this.url}/update`,p,{headers});
   }
 
   getProductById(id:number):Observable<object>
@@ -33,12 +46,15 @@ export class ProductServiceService {
   }
   postCategory(c:category):Observable<object>
   {
-    return this.http.post(`${this.url}/newCategory`,c);
+    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
+    let headers = new HttpHeaders();
+    headers.set('googleBearerToken',`${googleBearerToken}`);
+    return this.http.post(`${this.url}/newCategory`,c,{headers: headers});
   }
   //pending due to uncertain matching type
-  getProductsByCat(ids: number[]):Observable<object>
+  getProductsByCat(idList:string):Observable<object>
   { 
-    return this.http.get(`${this.url}/getProductsByCategories`);
+    return this.http.get(`${this.url}/getProductsByCategories?ids=${idList}`);
   }
   getTotlPriceById(ids:number[]):Observable<object>
   {
@@ -47,5 +63,9 @@ export class ProductServiceService {
   getAllProductsById(ids:number[]):Observable<object>
   {
     return this.http.post(`${this.url}/getAllByIds`,ids);
+  }
+  getAllCategories():Observable<object>
+  {
+    return this.http.get(`${this.url}/getAllCategories`);
   }
 }
