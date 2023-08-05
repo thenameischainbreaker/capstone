@@ -1,11 +1,11 @@
 <div *ngIf="uAdmin=='True'; else notAdmin">
     <div class="info">
-        <div class="child">Balance: ${{balance}} </div><a href="admin" class="child">{{uName}}</a> <img src={{uPic}} alt="ProfilePicture" width="30" height="30" class="child">
+        <div class="child">Balance: ${{balance}} </div><a routerLink="/admin" routerLinkActive="active" ariaCurrentWhenActive="page"class="child">{{uName}}</a> <img src={{uPic}} alt="ProfilePicture" width="30" height="30" class="child">
     </div>
 </div>
 
 <ng-template #notAdmin>
     <div class="info">
-        <div class="child">Balance: ${{balance}} </div><a href="profile" class="child">{{uName}}</a> <img src={{uPic}} alt="ProfilePicture" width="30" height="30" class="child">
+        <div class="child">Balance: ${{balance}} </div><a routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page"class="child">{{uName}}</a> <img src={{uPic}} alt="ProfilePicture" width="30" height="30" class="child">
     </div>
 </ng-template>
