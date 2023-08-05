@@ -36,6 +36,7 @@ function signUpWithGoogle(response) {
   
     signUpSuccessElement.innerHTML = data.message;
     setCookie('capstoneGoogleBearerToken', id_token,1);
+    setCookie('userMetaData', data,1);
 })
   .catch(error => {
     console.error('Error:', error);

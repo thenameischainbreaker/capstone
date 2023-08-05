@@ -1,7 +1,13 @@
-.info,ng-template{
+.info{
     display: flex;
     flex-direction: row;
     justify-content:flex-end;
-    align-content: space-between;
-    align-items: baseline;
+    align-content: space-evenly;
+    align-items: center;
+    padding-left: 10px;
+}
+.child{
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
 }

@@ -13,11 +13,11 @@ export class UserServiceService {
   {
     return this.http.post(`${this.url}/add`,token);
   }
-
+  /*
   createUser(token: string):Observable<object>
   {
     return this.http.post(`${this.url}/createUser`,token);
-  }
+  }*/
 
   getBalanceById(id:number):Observable<object>
   {

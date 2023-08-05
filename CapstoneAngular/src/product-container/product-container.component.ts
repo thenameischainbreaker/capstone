@@ -18,8 +18,7 @@ export class ProductContainerComponent {
     console.log("loadProdList");
     return this.http.getAllProduct().subscribe(data=>{
       console.log(data);
-      ProductServiceService.prodList=Object.values(data);
-      this.prodList=ProductServiceService.prodList
+      this.prodList=Object.values(data);
     },error=>console.log(error));
   }
 }
