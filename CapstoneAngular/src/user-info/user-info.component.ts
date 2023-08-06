@@ -22,9 +22,10 @@ export class UserInfoComponent {
     let uMD= getCookie('userMetaData') as string;
     console.log("uMD"+typeof(uMD));
     console.log("uMD:"+uMD);
-    /*
-    if(uMD.length>0)
+    
+    if((uMD)!== "null" && (uMD)!== undefined)
     {
+      try {
       let parsedUMD= JSON.parse(uMD);
       this.uId = parsedUMD.userId
       this.uName = parsedUMD.name;
@@ -32,7 +33,11 @@ export class UserInfoComponent {
       this.balance = parsedUMD.balance
       this.uPic = parsedUMD.profile_picture;
       this.uAdmin = parsedUMD.role;
-    }*/
+      }
+      catch (e) {
+        console.error('Failed to parse userMetaData' , e);
+      }
+    }
   }
 
   getCookieInfo2(){
