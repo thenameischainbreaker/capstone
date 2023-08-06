@@ -201,16 +201,16 @@
 <div class="delete-product-window">
     <table>
         <tr>
-          <th>Delete</th>
+          <th>Id</th>
           <th>Name</th>
           <th>Image</th>
           <th>Price</th>
           <th>Description</th>
         </tr>
         <tr *ngFor="let p of prodList">
-          <td><button type="button" (click)="deleteProduct(p.p_id)">{{p.p_id}}</button></td>
+          <td>{{p.p_id}}</td>
           <td>{{p.p_name}}</td>
-          <td>{{p.image_id}}</td>
+          <td><img src={{p.image_id}} alt="Product Image" width="50" height="50"></td>
           <td>{{p.p_price}}</td>
           <td>{{p.p_description}}</td>
         </tr>

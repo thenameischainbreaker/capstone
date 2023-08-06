@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProductServiceService } from 'src/app/product-service.service';
+import { StockServiceService } from 'src/app/stock-service.service';
 import { product } from 'src/product/product.component';
 import { user } from 'src/user-info/user-info.component';
 
@@ -10,7 +11,7 @@ import { user } from 'src/user-info/user-info.component';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  constructor(private prodServe:ProductServiceService){
+  constructor(private prodServe:ProductServiceService, private stockServe:StockServiceService){
     this.displayUsers();
     this.displayProduct();
     this.displayStock();
@@ -52,6 +53,12 @@ export class AdminComponent {
     //calls ProductService.updateProduct to update Product in repository
     console.log("updateProduct");
     console.log(pf.value);
+    let p = new product;
+    p.p_name=pf.value.name;
+    p.p_price=pf.value.price;
+    p.p_description=pf.value.descirption;
+    p.image_id=pf.value.imageId;
+    return this.prodServe.updateProduct(p).subscribe();
   }
   deleteProduct(id:number)
   {
@@ -61,12 +68,23 @@ export class AdminComponent {
   displayProduct(){
     //calls ProductService.getProduct to get all Product data from repository to display
     console.log("displayProduct");
+    return this.prodServe.getAllProduct().subscribe(data=>{
+      console.log(data);
+      this.prodList=Object.values(data);
+    },error=>console.log(error));
   }
 
   stockList: stock[] = [new stock()]
   displayStock(){
     //calls StockService.getStock to get all Stock counts from repsitory to display
     console.log("displayStock");
+    /*this.prodList.forEach(prod => {
+      
+      this.stockServe.getStock(prod.p_id).subscribe(data=>{
+        console.log("stock:"+data);
+        let s:stock =  Object.values(data);
+      },error=>console.log(error));
+    });*/
   }
   updateStock(sf:NgForm){
     //call StockService.updateStock to update a Stock count
