@@ -17,22 +17,43 @@ export class ProductServiceService {
 
   postProduct(p: product):Observable<object>
   {
-    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
-    console.log(googleBearerToken);
-    let headers = new HttpHeaders();
-    headers.set('googleBearerToken',`${googleBearerToken}`);
-    console.log(headers);
-    return this.http.post(`${this.url}/add`,p,{headers});
+    const googleBearerToken = getCookie('capstoneGoogleBearerToken') as string;
+    console.log("googleBearerToken: " + googleBearerToken);
+    let o: Observable<object> =new Observable<object>;
+    if((googleBearerToken)!== "null" && (googleBearerToken)!== undefined){
+      try {
+          let headers1 = new HttpHeaders().set('googleBearerToken',googleBearerToken);
+          let headers= headers1.set('Content-Type', 'application/json');
+          console.log("headers: "+headers.get('googleBearerToken'));
+          return this.http.post(`${this.url}/add`,JSON.stringify(p),{headers});
+        }
+        catch (e) {
+          console.error('Failed to parse googleBearerToken' , e);
+          return o;
+        }
+    }
+    return o;
+    
   }
 
   updateProduct(p:product):Observable<object>
   {
-    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
-    console.log(googleBearerToken);
-    let headers = new HttpHeaders();
-    headers.set('googleBearerToken',`${googleBearerToken}`);
-    console.log(headers);
-    return this.http.put(`${this.url}/update`,p,{headers});
+    const googleBearerToken = getCookie('capstoneGoogleBearerToken') as string;
+    console.log("googleBearerToken: " + googleBearerToken);
+    let o: Observable<object> =new Observable<object>;
+    if((googleBearerToken)!== "null" && (googleBearerToken)!== undefined){
+      try {
+          let headers1 = new HttpHeaders().set('googleBearerToken',googleBearerToken);
+          let headers= headers1.set('Content-Type', 'application/json');
+          console.log("headers: "+headers.get('googleBearerToken'));
+          return this.http.put(`${this.url}/update`,JSON.stringify(p),{headers});
+        }
+        catch (e) {
+          console.error('Failed to parse googleBearerToken' , e);
+          return o;
+        }
+    }
+    return o;
   }
 
   getProductById(id:number):Observable<object>
@@ -46,10 +67,22 @@ export class ProductServiceService {
   }
   postCategory(c:category):Observable<object>
   {
-    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
-    let headers = new HttpHeaders();
-    headers.set('googleBearerToken',`${googleBearerToken}`);
-    return this.http.post(`${this.url}/newCategory`,c,{headers: headers});
+    const googleBearerToken = getCookie('capstoneGoogleBearerToken') as string;
+    console.log("googleBearerToken: " + googleBearerToken);
+    let o: Observable<object> =new Observable<object>;
+    if((googleBearerToken)!== "null" && (googleBearerToken)!== undefined){
+      try {
+          let headers1 = new HttpHeaders().set('googleBearerToken',googleBearerToken);
+          let headers= headers1.set('Content-Type', 'application/json');
+          console.log("headers: "+headers.get('googleBearerToken'));
+          return this.http.post(`${this.url}/newCategory`,JSON.stringify(c),{headers});
+        }
+        catch (e) {
+          console.error('Failed to parse googleBearerToken' , e);
+          return o;
+        }
+    }
+    return o;
   }
   //pending due to uncertain matching type
   getProductsByCat(idList:string):Observable<object>

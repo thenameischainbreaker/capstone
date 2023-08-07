@@ -198,7 +198,7 @@
         </p>
     </form>
 </div>
-<div class="delete-product-window">
+<div class="view-product-window">
     <table>
         <tr>
           <th>Id</th>
@@ -218,19 +218,29 @@
 </div>
 <h3>Manage Stock</h3>
 <div class="stock-window">
+  <h4>Add Stock</h4>
+    <form #sf2="ngForm" (ngSubmit)="displayStock(sf2)">
+        <div class="form-field">
+            <label for="id">ID</label>
+            <input type="number" name="id" min=0 required [(ngModel)]="sf2.value.id">
+        </div>
+        <p>
+            <button type = "submit">Submit</button>
+        </p>
+    </form>
     <table>
         <tr>
           <th>Product ID</th>
           <th>Quantity</th>
         </tr>
-        <tr *ngFor="let s of stockList">
+        <tr>
           <td>{{s.pId}}</td>
           <td>{{s.sQuantity}}</td>
         </tr>
     </table>
 </div>
 <div class="update-stock-window">
-    <h4>Adjust Stock</h4>
+    <h4>Add Stock</h4>
     <form #sf1="ngForm" (ngSubmit)="updateStock(sf1)">
         <div class="form-field">
             <label for="id">ID</label>

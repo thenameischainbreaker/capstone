@@ -12,14 +12,24 @@ export class OrderServiceService {
 
   constructor(private http:HttpClient) { }
 
-  postOrder(o:orders[]):Observable<object>
+  postOrder(or:orders[]):Observable<object>
   {
-    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
-    console.log(googleBearerToken);
-    let headers = new HttpHeaders();
-    headers.set('googleBearerToken',`${googleBearerToken}`);
-    console.log(headers);
-    return this.http.post(`${this.url}/post`,o,{headers});
+    const googleBearerToken = getCookie('capstoneGoogleBearerToken') as string;
+    console.log("googleBearerToken: " + googleBearerToken);
+    let o: Observable<object> =new Observable<object>;
+    if((googleBearerToken)!== "null" && (googleBearerToken)!== undefined){
+      try {
+          let headers1 = new HttpHeaders().set('googleBearerToken',googleBearerToken);
+          let headers= headers1.set('Content-Type', 'application/json');
+          console.log("headers: "+headers.get('googleBearerToken'));
+          return this.http.post(`${this.url}/post`,JSON.stringify(or),{headers});
+        }
+        catch (e) {
+          console.error('Failed to parse googleBearerToken' , e);
+          return o;
+        }
+    }
+    return o;
   }
 
   getOrderById(id:number):Observable<object>
@@ -29,12 +39,22 @@ export class OrderServiceService {
 
   getAllByDate(date:Date):Observable<object>
   {
-    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
-    console.log(googleBearerToken);
-    let headers = new HttpHeaders();
-    headers.set('googleBearerToken',`${googleBearerToken}`);
-    console.log(headers);
-    return this.http.get(`${this.url}/getAllByDate?date=${date}`,{headers});
+    const googleBearerToken = getCookie('capstoneGoogleBearerToken') as string;
+    console.log("googleBearerToken: " + googleBearerToken);
+    let o: Observable<object> =new Observable<object>;
+    if((googleBearerToken)!== "null" && (googleBearerToken)!== undefined){
+      try {
+          let headers1 = new HttpHeaders().set('googleBearerToken',googleBearerToken);
+          let headers= headers1.set('Content-Type', 'application/json');
+          console.log("headers: "+headers.get('googleBearerToken'));
+          return this.http.get(`${this.url}/getAllByDate?date=${date}`,{headers});
+        }
+        catch (e) {
+          console.error('Failed to parse googleBearerToken' , e);
+          return o;
+        }
+    }
+    return o;
   }
 
   getAllByUser(id:number):Observable<object>
@@ -43,21 +63,41 @@ export class OrderServiceService {
   }
   getAllByProduct(p:number):Observable<object>
   {
-    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
-    console.log(googleBearerToken);
-    let headers = new HttpHeaders();
-    headers.set('googleBearerToken',`${googleBearerToken}`);
-    console.log(headers);
-    return this.http.get(`${this.url}/getAllByProduct/${p}`,{headers});
+    const googleBearerToken = getCookie('capstoneGoogleBearerToken') as string;
+    console.log("googleBearerToken: " + googleBearerToken);
+    let o: Observable<object> =new Observable<object>;
+    if((googleBearerToken)!== "null" && (googleBearerToken)!== undefined){
+      try {
+          let headers1 = new HttpHeaders().set('googleBearerToken',googleBearerToken);
+          let headers= headers1.set('Content-Type', 'application/json');
+          console.log("headers: "+headers.get('googleBearerToken'));
+          return this.http.get(`${this.url}/getAllByProduct/${p}`,{headers});
+        }
+        catch (e) {
+          console.error('Failed to parse googleBearerToken' , e);
+          return o;
+        }
+    }
+    return o;
   }
 
   getAllByDateBetween(date1:Date,date2:Date):Observable<object>
   {
-    const googleBearerToken: string|undefined = getCookie('capstoneGoogleBearerToken');
-    console.log(googleBearerToken);
-    let headers = new HttpHeaders();
-    headers.set('googleBearerToken',`${googleBearerToken}`);
-    console.log(headers);
-    return this.http.get(`${this.url}/getAllByDateBetween?date1=${date1}&?date2=${date2}`,{headers});
+    const googleBearerToken = getCookie('capstoneGoogleBearerToken') as string;
+    console.log("googleBearerToken: " + googleBearerToken);
+    let o: Observable<object> =new Observable<object>;
+    if((googleBearerToken)!== "null" && (googleBearerToken)!== undefined){
+      try {
+          let headers1 = new HttpHeaders().set('googleBearerToken',googleBearerToken);
+          let headers= headers1.set('Content-Type', 'application/json');
+          console.log("headers: "+headers.get('googleBearerToken'));
+          return this.http.get(`${this.url}/getAllByDateBetween?date1=${date1}&?date2=${date2}`,{headers});
+        }
+        catch (e) {
+          console.error('Failed to parse googleBearerToken' , e);
+          return o;
+        }
+    }
+    return o;
   }
 }

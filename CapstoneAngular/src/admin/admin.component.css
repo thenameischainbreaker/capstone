@@ -11,7 +11,7 @@ td, label{
     align-content: flex-start;
 }
 .add-user-window,.update-user-window,.delete-user-window,.add-product-window,.update-product-window,
-.delete-product-window,.stock-window,.update-stock-window,.display-orders-window,.add-discount-window{
+.view-product-window,.stock-window,.update-stock-window,.display-orders-window,.add-discount-window{
     border-color:gray;
     border-style:solid;
     border-width: 5px;

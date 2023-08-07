@@ -9,7 +9,7 @@ import { getCookie, setCookie } from 'typescript-cookie';
 export class UserInfoComponent {
   @Input()uId = 0;
   @Input()uName="Guest";
-  @Input()uAdmin="True";
+  @Input()uAdmin="TRUE";
   @Input()email="Not Applicable"
   @Input()phone="(555)555-5555"
   @Input()balance=0;

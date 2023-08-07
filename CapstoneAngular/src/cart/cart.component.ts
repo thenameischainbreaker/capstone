@@ -26,3 +26,10 @@ export class CartComponent {
     console.log("getTotalPrice()")
   }
 }
+
+export class cart{
+  cartId = 0;
+  userId = 0;
+  productId = 0;
+  quantity = 0;
+}
