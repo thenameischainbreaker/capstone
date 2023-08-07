@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { DiscountServiceService } from 'src/app/discount-service.service';
+import { OrderServiceService } from 'src/app/order-service.service';
 import { ProductServiceService } from 'src/app/product-service.service';
 import { StockServiceService } from 'src/app/stock-service.service';
 import { product } from 'src/product/product.component';
@@ -11,7 +13,8 @@ import { user } from 'src/user-info/user-info.component';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  constructor(private prodServe:ProductServiceService, private stockServe:StockServiceService){
+  constructor(private prodServe:ProductServiceService, private stockServe:StockServiceService,
+    private ordersServe:OrderServiceService,private disServe:DiscountServiceService){
     this.displayUsers();
     this.displayProduct();
   }
@@ -83,15 +86,21 @@ export class AdminComponent {
     console.log("displayStock");
     console.log(sf.value.id);
     this.stockServe.getStock(sf.value.id).subscribe(data=>{
-      console.log("stock:"+data);
+      console.log("stocks:"+data);
       this.s.pId = sf.value.id;
-      this.s.sQuantity =  Object.values(data) as any;
+      this.s.sQuantity =  data as unknown as number;
     },error=>console.log(error));
   }
   updateStock(sf:NgForm){
     //call StockService.updateStock to update a Stock count
     console.log("updateStock");
     console.log(sf.value);
+    let st = new stock()
+    st.pId=sf.value.id;
+    st.sQuantity=sf.value.amount
+    return this.stockServe.addStock(st).subscribe(data=>{
+      alert(data);
+    },error=>console.log(error));
   }
 
   ordersList: orders[] = [new orders];
@@ -100,6 +109,12 @@ export class AdminComponent {
     console.log("getOrders");
     console.log(of.value.startDate);
     console.log(of.value.endDate);
+    let date1: Date = of.value.startDate;
+    let date2: Date = of.value.endDate;
+    return this.ordersServe.getAllByDateBetween(date1,date2).subscribe(data=>{
+      console.log("Orders: "+data);
+      this.ordersList=Object.values(data);
+    },error=>console.log(error));
   }
 
 
@@ -107,6 +122,13 @@ export class AdminComponent {
     //call CouponService.postDiscount to post a discount to a specific user
     console.log("issueDiscount");
     console.log(df.value);
+    let d:discount = new discount();
+    d.p_id=df.value.pId;
+    d.u_id=df.value.uId;
+    d.discount=df.value.discount();
+    return this.disServe.postDiscount(d).subscribe(data=>{
+      alert(data);
+    },error=>console.log(error));
   }
 }
 
