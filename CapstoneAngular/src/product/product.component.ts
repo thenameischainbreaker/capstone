@@ -21,7 +21,6 @@ export class ProductComponent {
   addToCart()
   {
     console.log("Added to cart");
-    alert("Added to cart");
     let c:cart = new cart();
     c.productId=this.pId;
     c.userId=this.uId;

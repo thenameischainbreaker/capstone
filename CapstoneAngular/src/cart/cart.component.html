@@ -4,10 +4,14 @@
         <tr>
           <th>Product</th>
           <th>Quantity</th>
+          <th>Add</th>
+          <th>Sub</th>
         </tr>
         <tr *ngFor="let c of cartList">
           <td>{{c.productId}}</td>
           <td>{{c.quantity}}</td>
+          <td><button (click) ="addQuantity(c.cartId,c.quantity)">Add</button></td>
+          <td><button (click) ="subQuantity(c.cartId,c.quantity)">Sub</button></td>
         </tr>
     </table>
     <p>Total: ${{totalPrice}}</p>

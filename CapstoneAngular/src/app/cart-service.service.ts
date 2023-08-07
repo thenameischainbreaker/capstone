@@ -13,17 +13,17 @@ export class CartServiceService {
 
   getAllByUserId(id:number):Observable<object>
   {
-    return this.http.get(`${this.url}/getAllByUser/${id}`);
+    return this.http.get(`${this.url}/getAllByUser/`+id);
   }
 
   addCart(c:cart):Observable<object>
   {
-    return this.http.post(`${this.url}/addCart`,JSON.stringify(c));
+    return this.http.post(`${this.url}/addCart`,c);
   }
 
   updateQuantity(cartId:number, quantity: number):Observable<object>
   {
-    return this.http.put(`${this.url}/updateQuantity?cartId=${cartId}&?quantity=${quantity}`,new cart());
+    return this.http.put(`${this.url}/updateQuantity?cartId=${cartId}&quantity=${quantity}`,new cart());
   }
 
   deleteCart(cartId:number):Observable<object>
