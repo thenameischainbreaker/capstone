@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { CartServiceService } from 'src/app/cart-service.service';
+import { cart } from 'src/cart/cart.component';
 
 @Component({
   selector: 'app-product',
@@ -11,11 +13,22 @@ export class ProductComponent {
   @Input()imageId="Image ID";
   @Input()pPrice=0.0;
   @Input()pDescription="Description";
+  @Input()uId = 0;
+
+  constructor(private cartServe:CartServiceService){
+  }
 
   addToCart()
   {
     console.log("Added to cart");
     alert("Added to cart");
+    let c:cart = new cart();
+    c.productId=this.pId;
+    c.userId=this.uId;
+    c.quantity=1;
+    return this.cartServe.addCart(c).subscribe(data=>{
+      alert(data);
+    },error=>console.log(error));
   }
 }
 

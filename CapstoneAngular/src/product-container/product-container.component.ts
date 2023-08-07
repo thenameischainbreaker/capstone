@@ -10,6 +10,7 @@ import { product } from 'src/product/product.component';
 })
 export class ProductContainerComponent {
   @Input()prodList: product[] = [];
+  @Input()userId: number = 0;
   constructor(private http:ProductServiceService){
     this.loadProdList();
   }
