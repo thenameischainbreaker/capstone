@@ -15,28 +15,7 @@ import { user } from 'src/user-info/user-info.component';
 export class AdminComponent {
   constructor(private prodServe:ProductServiceService, private stockServe:StockServiceService,
     private ordersServe:OrderServiceService,private disServe:DiscountServiceService){
-    this.displayUsers();
     this.displayProduct();
-  }
-  userList: user[] = [new user()];
-  addUser(uf:NgForm){
-    //call UserService.addUser to add User to repository
-    console.log("addUser");
-    console.log(uf.value);
-  }
-  updateUser(uf:NgForm){
-    //call UserService.updateUser to add User in repository
-    console.log("udateUser");
-    console.log(uf.value);
-  }
-  deleteUser(id:number){
-    //call UserService.deleteUser to remove User from repository
-    console.log("deleteUser");
-    console.log(id);
-  }
-  displayUsers(){
-    //calls UserService.getUsers to get all User data from repository to display
-    console.log("displayUser");
   }
 
   prodList: product[] = [new product()];
@@ -58,6 +37,7 @@ export class AdminComponent {
     console.log("updateProduct");
     console.log(pf.value);
     let p = new product;
+    p.p_id=pf.value.id;
     p.p_name=pf.value.name;
     p.p_price=pf.value.price;
     p.p_description=pf.value.descirption;
@@ -87,8 +67,8 @@ export class AdminComponent {
     console.log(sf.value.id);
     this.stockServe.getStock(sf.value.id).subscribe(data=>{
       console.log("stocks:"+data);
-      this.s.pId = sf.value.id;
-      this.s.sQuantity =  data as unknown as number;
+      this.s.p_id = sf.value.id;
+      this.s.s_quantity =  data as unknown as number;
     },error=>console.log(error));
   }
   updateStock(sf:NgForm){
@@ -96,8 +76,8 @@ export class AdminComponent {
     console.log("updateStock");
     console.log(sf.value);
     let st = new stock()
-    st.pId=sf.value.id;
-    st.sQuantity=sf.value.amount
+    st.p_id=sf.value.id;
+    st.s_quantity=sf.value.amount
     return this.stockServe.addStock(st).subscribe(data=>{
       alert(data);
     },error=>console.log(error));
@@ -111,9 +91,11 @@ export class AdminComponent {
     console.log(of.value.endDate);
     let date1: Date = of.value.startDate;
     let date2: Date = of.value.endDate;
-    return this.ordersServe.getAllByDateBetween(date1,date2).subscribe(data=>{
+    console.log("Date 1: "+ date1.toString());
+    return this.ordersServe.getAllByDateBetween(date1.toString(),date2.toString()).subscribe(data=>{
       console.log("Orders: "+data);
       this.ordersList=Object.values(data);
+      console.log(this.ordersList[1]);
     },error=>console.log(error));
   }
 
@@ -124,8 +106,8 @@ export class AdminComponent {
     console.log(df.value);
     let d:discount = new discount();
     d.p_id=df.value.pId;
-    d.u_id=df.value.uId;
-    d.discount=df.value.discount();
+    d.userId=df.value.uId;
+    d.discount=df.value.discount;
     return this.disServe.postDiscount(d).subscribe(data=>{
       alert(data);
     },error=>console.log(error));
@@ -133,23 +115,23 @@ export class AdminComponent {
 }
 
 export class stock{
-  pId = 0;
-  sQuantity = 0;
+  p_id = 0;
+  s_quantity = 0;
 }
 
 export class orders{
-  oId=0;
-  uId=0;
-  pId=0;
-  oQuantity=0;
-  oDate="yyyy-mm-dd";
-  oPrice=0.0;
-  dId=0;
+  o_id=0;
+  userId=0;
+  productId=0;
+  quantity=0;
+  date="yyyy-mm-dd";
+  o_price=0.0;
+  d_id=0;
 }
 
 export class discount{
   d_id = 0;
 	p_id = 0;
-	u_id = 0
+	userId = 0
 	discount = 0;
 }

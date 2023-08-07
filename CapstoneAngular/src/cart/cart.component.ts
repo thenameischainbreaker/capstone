@@ -12,12 +12,12 @@ export class CartComponent {
   cartList: cart[] = [new cart()];
   totalPrice:number = 0;
   constructor(){
-    this.getOrders();
+    this.getCarts();
     this.getTotalPrice()
   }
-  getOrders(){
+  getCarts(){
     //call a service to insert the orders of a user into ordersList
-    console.log("getOrders()");
+    console.log("getCarts()");
   }
   sendOrder(){
     //call a service to finalize the orders in cart

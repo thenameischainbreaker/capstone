@@ -1,120 +1,5 @@
 <app-profile></app-profile>
 <h2>Admin Features</h2>
-<h3>Manage Users</h3>
-<div class="add-user-window">
-    <h4>Add User</h4>
-    <form #uf1="ngForm" (ngSubmit)="addUser(uf1)">
-        <div class="form-field">
-            <label for="name">Name</label>
-            <input type="text" required name="name" [(ngModel)]="uf1.value.name" #name = 'ngModel'/>
-            <div *ngIf = "!name.valid" class="error">
-            <p *ngIf="name.errors?.['required']">
-              Name is required
-            </p>
-          </div>
-        </div>
-        <div class="form-field">
-          <label for="admin">Admin</label>
-          <select required name="admin" [(ngModel)]="uf1.value.admin">
-            <option value="True">True</option>
-            <option value="False">False</option>
-          </select>
-        </div>
-        <div class="form-field">
-            <label for="email">Email</label>
-            <input type="text" required email name="email" [(ngModel)]="uf1.value.email" #email='ngModel'/>
-            <div *ngIf = "!email.valid" class="error">
-            <p *ngIf="email.errors?.['required']">
-              Email is required
-            </p>
-            <p *ngIf="email.errors?.['email']">
-              Need valid email
-            </p>
-          </div>
-        </div>
-        <div class="form-field">
-            <label for="imageId">Image ID</label>
-            <input type="text" required name="imageId" [(ngModel)]="uf1.value.imageId" #imageId = 'ngModel'/>
-            <div *ngIf = "!imageId.valid" class="error">
-            <p *ngIf="imageId.errors?.['required']">
-              Image Id is required
-            </p>
-          </div>
-        </div>
-        <p>
-            <button type = "submit">Submit</button>
-        </p>
-    </form>
-</div>
-<div class="update-user-window">
-    <h4>Update User</h4>
-    <form #uf2="ngForm" (ngSubmit)="updateUser(uf2)">
-        <div class="form-field">
-            <label for="id">ID</label>
-            <input type="number" name="id" min=0 required [(ngModel)]="uf2.value.id">
-        </div>
-        <div class="form-field">
-            <label for="name">Name</label>
-            <input type="text" required name="name" [(ngModel)]="uf2.value.name" #uf2name = 'ngModel'/>
-            <div *ngIf = "!uf2name.valid" class="error">
-            <p *ngIf="uf2name.errors?.['required']">
-              Name is required
-            </p>
-          </div>
-        </div>
-        <div class="form-field">
-          <label for="admin">Admin</label>
-          <select required name="admin" [(ngModel)]="uf2.value.admin">
-            <option value="True">True</option>
-            <option value="False">False</option>
-          </select>
-        </div>
-        <div class="form-field">
-            <label for="email">Email</label>
-            <input type="text" required email name="email" [(ngModel)]="uf2.value.email" #uf2email='ngModel'/>
-            <div *ngIf = "!uf2email.valid" class="error">
-            <p *ngIf="uf2email.errors?.['required']">
-              Email is required
-            </p>
-            <p *ngIf="uf2email.errors?.['email']">
-              Need valid email
-            </p>
-          </div>
-        </div>
-        <div class="form-field">
-            <label for="imageId">Image ID</label>
-            <input type="text" required name="imageId" [(ngModel)]="uf2.value.imageId" #uf2imageId = 'ngModel'/>
-            <div *ngIf = "!uf2imageId.valid" class="error">
-            <p *ngIf="uf2imageId.errors?.['required']">
-              Image Id is required
-            </p>
-          </div>
-        </div>
-        <p>
-            <button type = "submit">Submit</button>
-        </p>
-    </form>
-</div>
-<div class="delete-user-window">
-    <table>
-        <tr>
-          <th>Delete</th>
-          <th>Name</th>
-          <th>Admin Status</th>
-          <th>Email</th>
-          <th>Balance</th>
-          <th>Profile Picture</th>
-        </tr>
-        <tr *ngFor="let u of userList">
-          <td><button type="button" (click)="deleteUser(u.id)">{{u.id}}</button></td>
-          <td>{{u.name}}</td>
-          <td>{{u.admin}}</td>
-          <td>{{u.email}}</td>
-          <td>{{u.balance}}</td>
-          <td>{{u.pic}}</td>
-        </tr>
-    </table>
-</div>
 <h3>Manage Products</h3>
 <div class="add-product-window">
     <h4>Add Product</h4>
@@ -234,8 +119,8 @@
           <th>Product Quantity</th>
         </tr>
         <tr>
-          <td>{{s.pId}}</td>
-          <td>{{s.sQuantity}}</td>
+          <td>{{s.p_id}}</td>
+          <td>{{s.s_quantity}}</td>
         </tr>
     </table>
 </div>
@@ -282,13 +167,13 @@
           <th>Discount ID</th>
         </tr>
         <tr *ngFor="let o of ordersList">
-          <td>{{o.oId}}</td>
-          <td>{{o.uId}}</td>
-          <td>{{o.pId}}</td>
-          <td>{{o.oQuantity}}</td>
-          <td>{{o.oDate}}</td>
-          <td>{{o.oPrice}}</td>
-          <td>{{o.dId}}</td>
+          <td>{{o.o_id}}</td>
+          <td>{{o.userId}}</td>
+          <td>{{o.productId}}</td>
+          <td>{{o.quantity}}</td>
+          <td>{{o.date}}</td>
+          <td>{{o.o_price}}</td>
+          <td>{{o.d_id}}</td>
         </tr>
     </table>
 </div>
