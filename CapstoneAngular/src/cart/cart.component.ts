@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { orders } from 'src/admin/admin.component';
 
 @Component({
@@ -7,7 +7,9 @@ import { orders } from 'src/admin/admin.component';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
+  @Input()uId: number = 0;
   ordersList: orders[] = [new orders()]
+  cartList: cart[] = [new cart()];
   totalPrice:number = 0;
   constructor(){
     this.getOrders();

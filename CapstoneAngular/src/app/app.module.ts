@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { LoginComponent } from '../login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CartPageComponent } from '../cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserInfoComponent,
     TopBarComponent,
     LoginComponent,
+    CartPageComponent,
   ],
   imports: [
     BrowserModule,
