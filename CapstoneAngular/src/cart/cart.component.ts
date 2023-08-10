@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { discount, orders } from 'src/admin/admin.component';
 import { CartServiceService } from 'src/app/cart-service.service';
 import { DiscountServiceService } from 'src/app/discount-service.service';
@@ -15,27 +15,26 @@ import { getCookie } from 'typescript-cookie';
 export class CartComponent {
   uId: number = 0;
   ordersList: orders[] = []
-  cartList: cart[] = [new cart()];
+  cartList: cart[] = [];
   disList: discount[] = [];
   prodList: product[] = [];
+  cartProdList: cartProduct[] = [new cartProduct()];
   totalPrice:number = 0;
+  totalPriceString: string = '0;'
   constructor(private cartServe:CartServiceService, private orderServe:OrderServiceService,
     private disServe: DiscountServiceService, private prodServe:ProductServiceService){
     this.getCookieInfo();
   }
 
+  //upon loading the page, get the User ID from the  userMetaData cookie
   getCookieInfo(){
     let uMD= getCookie('userMetaData') as string;
-    console.log("uMD"+typeof(uMD));
-    console.log("uMD:"+uMD);
-    
     if((uMD)!== "null" && (uMD)!== undefined)
     {
       try {
       let parsedUMD= JSON.parse(uMD);
       this.uId = parsedUMD.userId
-      console.log("User ID:" + this.uId);
-      this.getCarts();
+      this.getDiscountsByUserId();
       }
       catch (e) {
         console.error('Failed to parse userMetaData' , e);
@@ -43,99 +42,156 @@ export class CartComponent {
     }
   }
 
-  getCarts(){
-    //call a service to insert the carts of a user into cartList
-    console.log("getCarts()");
-    console.log("uId: " + this.uId);
-    return this.cartServe.getAllByUserId(this.uId).subscribe(data=>{
-      console.log("getCart(): " + data)
-      this.cartList=Object.values(data);
-      this.getDiscounts();
-    },error=>console.log(error));
-  }
-
-  addQuantity(cartId:number,currentQuantity:number){
-    console.log("addQuantity");
-    return this.cartServe.updateQuantity(cartId,currentQuantity + 1).subscribe(data=>{
-      console.log("addQuantity(): " + data)
-      alert(data);
-      this.getCarts();
-    },error=>console.log(error));
-  }
-
-  subQuantity(cartId:number,currentQuantity:number){
-    console.log("subQuantity");
-    return this.cartServe.updateQuantity(cartId,currentQuantity - 1).subscribe(data=>{
-      console.log("subQuantity(): " + data)
-      alert(data);
-      this.getCarts();
-    },error=>console.log(error));
-  }
-  getDiscounts(){
-    console.log("getDiscounts()");
+  //then, generate a list of all discounts of that user
+  getDiscountsByUserId(){
     return this.disServe.findAllByUserId(this.uId).subscribe(data=>{
-      console.log("setDisList(): " + data);
-      this.disList = Object.values(data);
+      console.log(data);
+      this.disList=Object.values(data);
       this.getProducts();
     },error=>console.log(error));
   }
 
+  //then, generate a local list of all available products
   getProducts(){
-    console.log("getProducts()")
     return this.prodServe.getAllProduct().subscribe(data=>{
-      console.log("getProducts(): " + data)
-      this.prodList = Object.values(data);
-      this.setOrderList();
+      console.log(data);
+      this.prodList=Object.values(data);
+      this.getCartByUserId();
+    });
+  }
+
+  //next, generate a list of all carts belonging to that user
+  getCartByUserId(){
+    return this.cartServe.getAllByUserId(this.uId).subscribe(data=>{
+      console.log(data);
+      this.cartList=Object.values(data);
+      this.buildCartProdList();
     },error=>console.log(error));
   }
+
+  //then, using all the gathered information, generate a list of cartProducts to store all the relavent information in one place
+  buildCartProdList(){
+    this.cartProdList = [];
+    this.cartList.forEach(cart => {
+      console.log(cart);
+      let cp: cartProduct = new cartProduct;
+      cp.cartId = cart.cartId;
+      cp.quantity = cart.quantity;
+      cp.p_id = cart.productId;
+      let p:product = this.getProduct(cart.productId);
+      console.log(p);
+      cp.p_name = p.p_name;
+      cp.image_id = p.image_id;
+      cp.p_price = p.p_price
+      cp.t_price = Math.round(cp.p_price * cp.quantity * 100)/100;
+      cp.d_id = this.getDiscountId(cart.productId);
+      cp.discount = this.getDiscount(cart.productId);
+      cp.discount_percent = Math.round(cp.discount * 100);
+      cp.d_price = Math.round(cp.t_price * (1 - cp.discount) * 100)/100;
+      this.cartProdList.push(cp);
+    });
+    console.log(this.cartProdList);
+    this.setTotalPrice();
+  }
+
+  //finally, caluclate the total price of all the carts
+  setTotalPrice(){
+    this.totalPrice = 0;
+    this.cartProdList.forEach(cp => {
+      this.totalPrice = this.totalPrice + cp.d_price;
+    });
+    this.totalPrice = Math.round(this.totalPrice * 100) / 100
+    this.totalPriceString = this.totalPrice.toFixed(3);
+  }
+
+  getProduct(p_id:number):product
+  {
+    let p = new product();
+    this.prodList.forEach(prod => {
+      if(prod.p_id == p_id){
+        p = prod;
+      }
+    });
+    return p;
+  }
+
+  getDiscountId(p_id:number):number
+  {
+    let d = 0;
+    this.disList.forEach(dis => {
+      if(dis.p_id == p_id){
+        d = dis.d_id;
+      }
+    });
+    return d;
+  }
+
+  getDiscount(p_id:number):number
+  {
+    let d = 0;
+    this.disList.forEach(dis => {
+      if(dis.p_id == p_id){
+        d = dis.discount;
+      }
+    });
+    return d;
+  }
+
+  addQuantity(cartId: number,quantity: number){
+    return this.cartServe.updateQuantity(cartId, quantity+1).subscribe(data=>{
+      this.getCartByUserId();
+    },error=>console.log(error));
+  }
+
+  subQuantity(cartId: number,quantity: number){
+    return this.cartServe.updateQuantity(cartId, quantity-1).subscribe(data=>{
+      if(quantity-1 == 0){
+        this.removeCart(cartId);
+      }
+      this.getCartByUserId();
+    },error=>console.log(error));
+  }
+
+  removeCart(cartId: number){
+    return this.cartServe.deleteCart(cartId).subscribe(data=>{
+      this.getCartByUserId();
+    },error=>console.log(error));
+  }
+
+  //build a list of orders based on the information presented in the cartProdList
+  buildOrderList(){
+    console.log('buildOrderList()')
+    this.cartProdList.forEach(cp => {
+      let o:orders = new orders();
+      o.d_id = cp.d_id;
+      o.date = '2023-01-01';
+      o.o_price = cp.p_price;
+      o.productId = cp.p_id;
+      o.quantity = cp.quantity;
+      o.userId = this.uId;
+      this.ordersList.push(o);
+    });
+    console.log(this.ordersList);
+    this.sendOrder();
+  }
+
+  //post the list of orders to the database
   sendOrder(){
-    //call a service to finalize the orders in cart
-    console.log("sendOrder()");
-    console.log("Carts: " + this.cartList);
-    console.log("Orders: " + this.ordersList);
+    console.log('sendOrder()');
     return this.orderServe.postOrder(this.ordersList).subscribe(data=>{
       console.log(data);
       alert(data);
+      this.clearCart();
     },error=>console.log(error));
   }
-  getTotalPrice(){
-    //call service to get total price of orders
-    console.log("getTotalPrice()")
-    this.ordersList.forEach(order => {
-      this.totalPrice = this.totalPrice + order.o_price;
-    });
-  }
-  o = new orders()
-  setOrderList(){
-    console.log("cartList length: "+this.cartList.length)
-    this.cartList.forEach(cart => {
-      this.o.date = "2023-01-01";
-      this.o.productId=cart.productId;
-      this.o.quantity=cart.quantity;
-      this.o.userId=this.uId;
-      this.o.o_price = this.setDiscountPrice(this.o.productId, this.o.quantity)
-      this.ordersList.push(this.o);
-      console.log("ordersList: " + this.ordersList)
-    });
-    console.log("ordersList:" + this.ordersList);
-    console.log("ordersList.length: "+ this.ordersList.length);
-    this.getTotalPrice();
-  }
 
-  setDiscountPrice(prodId:number, quantity:number){
-    let prodPrice = 0;
-    let discount = 1
-    this.prodList.forEach(prod => {
-      if(prod.p_id==prodId){
-        prodPrice= prod.p_price;
-      }
+  //clear the cart once the order is made.
+  clearCart(){
+    console.log('clearCart()');
+    this.cartProdList.forEach(cp => {
+      this.removeCart(cp.cartId);
     });
-    this.disList.forEach(dis => {
-      if(dis.p_id == prodId){
-        discount = dis.discount;
-      }
-    });
-    return prodPrice * quantity * (1 - discount);
+    this.getCartByUserId();
   }
 }
 
@@ -144,4 +200,18 @@ export class cart{
   userId = 0;
   productId = 0;
   quantity = 0;
+}
+
+export class cartProduct{
+  cartId = 0;
+  p_id = 0;
+  p_name = "product name";
+  image_id = "image";
+  quantity = 0;
+  p_price = 0;
+  t_price = 0;
+  d_id = 0;
+  discount = 0;
+  discount_percent = 0;
+  d_price = 0;
 }
