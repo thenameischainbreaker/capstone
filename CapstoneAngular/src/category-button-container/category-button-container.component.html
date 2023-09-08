@@ -8,9 +8,18 @@
 <div class="frame">
     <mat-button-toggle-group name="ingredients" aria-label="Ingredients" multiple
     [(ngModel)]="selectedCategories">
-    <div *ngFor="let cat of catList">
-        <mat-button-toggle value={{cat.c_id}} style="padding:0">{{cat.c_name}}</mat-button-toggle>
-    </div>
-    <button (click)="Search()">Search</button>
-</mat-button-toggle-group>
+        <div *ngFor="let cat of catList">
+            <mat-button-toggle value={{cat.c_id}} style="padding:0">{{cat.c_name}}</mat-button-toggle>
+        </div>
+        <button (click)="Search()">Search</button>
+    </mat-button-toggle-group>
+    <mat-label>Sort By:</mat-label>
+    <mat-form-field>
+        
+        <mat-select matNativeControl [(value)]="currentSortMethod" (click)="Search()">
+            <mat-option *ngFor="let sort of sortOptions" [value]="sort.option" (click)="Search()">
+                {{sort.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>

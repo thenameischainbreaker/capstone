@@ -1,3 +1,3 @@
 <app-top-bar #top></app-top-bar>
-<app-category-button-container #catCon/>
-<app-product-container [prodList]=catCon.prodList [userId]=top.user.uId/>
+<app-category-button-container #catCon [sortMethods]=prodCon.sortMethods/>
+<app-product-container #prodCon [prodList]=catCon.prodList [userId]=top.user.uId [currentSortMethod]=catCon.currentSortMethod/>

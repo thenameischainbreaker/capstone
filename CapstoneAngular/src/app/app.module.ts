@@ -14,12 +14,16 @@ import { AdminComponent } from '../admin/admin.component';
 import { UserInfoComponent } from '../user-info/user-info.component';
 import { FormsModule } from '@angular/forms';
 import { TopBarComponent } from '../top-bar/top-bar.component';
-import {HttpClientModule}  from '@angular/common/http';
+import { HttpClientModule }  from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { LoginComponent } from '../login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CartPageComponent } from '../cart-page/cart-page.component';
+import {MatInputModule} from '@angular/material/input';
+import {NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,11 @@ import { CartPageComponent } from '../cart-page/cart-page.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonToggleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgFor,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
